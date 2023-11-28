@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -12,8 +13,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   $product = Product::orderBy('Created_at','DESC')->get();
+        return view('products.index', compact('product'));
     }
 
     /**
@@ -23,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -34,7 +35,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create($request->all());
+
+        return redirect()->route('products')->with('success', 'Product aded successfuly');
     }
 
     /**
@@ -43,9 +46,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(string $id)
     {
-        //
+        $product = Product::findorFail($id);
+
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -54,9 +59,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(string $id)
     {
-        //
+        $product = Product::findorFail($id);
+
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -66,9 +73,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        
+        $product->update($request->all());
+        
+        return redirect()->route('product')->with('success', 'product updated successfully');
     }
 
     /**

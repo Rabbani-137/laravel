@@ -113,7 +113,7 @@
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                        <img class="rounded-circle" src="/admin_assets/img/undraw_profile_1.svg"
                             alt="...">
                         <div class="status-indicator bg-success"></div>
                     </div>
@@ -125,7 +125,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                        <img class="rounded-circle" src="/admin_assets/img/undraw_profile_2.svg"
                             alt="...">
                         <div class="status-indicator"></div>
                     </div>
@@ -137,7 +137,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                        <img class="rounded-circle" src="/admin_assets/img/undraw_profile_3.svg"
                             alt="...">
                         <div class="status-indicator bg-warning"></div>
                     </div>
@@ -149,7 +149,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                        <img class="rounded-circle" src="/admin_assets/img/undraw_profile_1.svg"
                             alt="...">
                         <div class="status-indicator bg-success"></div>
                     </div>
@@ -169,9 +169,13 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                    {{auth()->user()->name}}    {{-- to show the name from the database --}}
+                    <br>
+                    <small>{{ auth()->user()->level }}</small>  {{-- to show the level name from the database --}}
+                </span>
                 <img class="img-profile rounded-circle"
-                    src="img/undraw_profile.svg">
+                    src="/admin_assets/img/undraw_profile.svg">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -189,7 +193,7 @@
                     Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="{{ route('logout') }}">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout
                 </a>

@@ -59,15 +59,27 @@ class AuthController extends Controller
                      'password'=>'required'
         ]);
         
-        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))){
-            throw ValidationException::withMessages([
-                'email' => trans('auth.failed')
+        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))){ //remember boolean true false
+            throw ValidationException::withMessages([    //throgh a message
+                'email' => trans('auth.failed')       //if login faield
             ]);
         }
 
-        $request->session()->regenerate();
+        $request->session()->regenerate();   //generate for the login session
 
         return redirect()->route('dashboard');
+    }
+
+    public function logout(Request $request){
+        Auth::guard('web')->logout();
+        
+        $request()->session()->invalidate();
+        
+        return redirect('/');
+    }
+
+    public function profile(){
+        return view('profile');
     }
 
 }
